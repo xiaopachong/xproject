@@ -1,35 +1,27 @@
-package com.study.test.protobuf;
+package com.study.updateol.utils;
 
-import com.study.protobuf.newprotocol.NewProtobufProtocol;
-import com.study.protobuf.oldprotocol.OldProtobufProtocol;
-
+import com.study.updateol.protobuf.newprotocol.NewProtobufProtocol;
+import com.study.updateol.protobuf.oldprotocol.OldProtobufProtocol;
+import static com.study.updateol.generator.DataGenerator.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * protobuf协议测试
+ * protobuf协议测试工具
  */
 public class ProtobufTestUtils {
-    //测试用数据
-    private static String email_test = "a@c.1";
-    private static String name_test = "hell";
-    private static int id_test = 93;
-    private static int age_test = 34;
-
-    //序列化文件路径
-    private static String file_path_test_backward = "T_AddressBook_backward";
-    private static String file_path_test_forward = "T_AddressBook_forward";
 
     /**
      * 旧协议生成对象，写入本地文件
+     *
      * @throws IOException
      */
-    static void testSerializationWithOldProtocol() throws IOException {
+    public static void serializationWithOldProtocol() throws IOException {
         //构造测试对象
         List<OldProtobufProtocol.Person> personList = new ArrayList<OldProtobufProtocol.Person>();
         OldProtobufProtocol.Person person = OldProtobufProtocol.Person.newBuilder()
-                .setEmail(email_test).setName(name_test).setId(id_test).build();
+                .setEmail(EMAIL_TEST).setName(NAME_TEST).setId(ID_TEST).build();
         personList.add(person);
         OldProtobufProtocol.AddressBook addressBook = OldProtobufProtocol.AddressBook.newBuilder()
                 .addAllPerson(personList).build();
@@ -37,7 +29,7 @@ public class ProtobufTestUtils {
         //将测试对象写到本地文件
         OutputStream os = null;
         try {
-            File file = new File(file_path_test_backward);
+            File file = new File(FILE_PATH_PROTOBUF_TEST_BACKWARD);
             os = new FileOutputStream(file);
             os.write(addressBook.toByteArray());
             os.flush();
@@ -52,17 +44,18 @@ public class ProtobufTestUtils {
 
     /**
      * 新协议生成对象，写入本地文件
+     *
      * @throws IOException
      */
-    static void testSerializationWithNewProtocol() throws IOException {
+    public static void serializationWithNewProtocol() throws IOException {
         //构造测试对象
         List<NewProtobufProtocol.Person> personList = new ArrayList<NewProtobufProtocol.Person>();
         NewProtobufProtocol.Person person = NewProtobufProtocol.Person.newBuilder()
-                .setEmail(email_test).setName(name_test).setId(id_test).setAge(age_test).build();
+                .setEmail(EMAIL_TEST).setName(NAME_TEST).setId(ID_TEST).setAge(AGE_TEST).build();
         personList.add(person);
         List<NewProtobufProtocol.Company> companyList = new ArrayList<NewProtobufProtocol.Company>();
         NewProtobufProtocol.Company company = NewProtobufProtocol.Company.newBuilder()
-                .setAddress("湖北").setName("电信").build();
+                .setAddress(ADDRESS_TEST).setName(COMPANY_NAME_TEST).build();
         companyList.add(company);
         NewProtobufProtocol.AddressBook addressBook = NewProtobufProtocol.AddressBook.newBuilder()
                 .addAllPerson(personList).addAllCompany(companyList).build();
@@ -70,7 +63,7 @@ public class ProtobufTestUtils {
         //将测试对象写到本地文件
         OutputStream os = null;
         try {
-            File file = new File(file_path_test_forward);
+            File file = new File(FILE_PATH_PROTOBUF_TEST_FORWARD);
             os = new FileOutputStream(file);
             os.write(addressBook.toByteArray());
             os.flush();
@@ -85,13 +78,14 @@ public class ProtobufTestUtils {
 
     /**
      * 旧协议读取本地文件，解析对象
+     *
      * @throws IOException
      */
-    static void testDeserializationWithOldProtocol() throws IOException {
+    public static void deserializationWithOldProtocol() throws IOException {
         //读本地文件对象
         InputStream is = null;
         try {
-            File file = new File(file_path_test_forward);
+            File file = new File(FILE_PATH_PROTOBUF_TEST_FORWARD);
             is = new FileInputStream(file);
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             byte[] b = new byte[1024];
@@ -99,14 +93,14 @@ public class ProtobufTestUtils {
             while ((len = is.read(b)) != -1) {
                 os.write(b, 0, len);
             }
-            //使用新版本协议
+            //使用旧版本协议
             OldProtobufProtocol.AddressBook addressBook =
                     OldProtobufProtocol.AddressBook.parseFrom(os.toByteArray());
             assert addressBook != null;
             assert addressBook.getPersonList().size() > 0 && addressBook.getPersonList().get(0) != null;
-            assert addressBook.getPersonList().get(0).getId() == id_test;
-            assert addressBook.getPersonList().get(0).getEmail().equals(email_test);
-            assert addressBook.getPersonList().get(0).getName().equals(name_test);
+            assert addressBook.getPersonList().get(0).getId() == ID_TEST;
+            assert addressBook.getPersonList().get(0).getEmail().equals(EMAIL_TEST);
+            assert addressBook.getPersonList().get(0).getName().equals(NAME_TEST);
             System.out.println("使用旧协议从本地文件读取对象");
             System.out.println(addressBook);
         } finally {
@@ -118,17 +112,18 @@ public class ProtobufTestUtils {
 
     /**
      * 新协议读取本地文件，解析对象
+     *
      * @throws IOException
      */
-    static void testDeserializationWithNewProtocol() throws IOException {
+    public static void deserializationWithNewProtocol() throws IOException {
         //读本地文件对象
         InputStream is = null;
         try {
-            File file = new File(file_path_test_backward);
+            File file = new File(FILE_PATH_PROTOBUF_TEST_BACKWARD);
             is = new FileInputStream(file);
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             byte[] b = new byte[1024];
-            int len = 0;
+            int len;
             while ((len = is.read(b)) != -1) {
                 os.write(b, 0, len);
             }
@@ -137,9 +132,9 @@ public class ProtobufTestUtils {
                     NewProtobufProtocol.AddressBook.parseFrom(os.toByteArray());
             assert addressBook != null;
             assert addressBook.getPersonList().size() > 0 && addressBook.getPersonList().get(0) != null;
-            assert addressBook.getPersonList().get(0).getId() == id_test;
-            assert addressBook.getPersonList().get(0).getEmail().equals(email_test);
-            assert addressBook.getPersonList().get(0).getName().equals(name_test);
+            assert addressBook.getPersonList().get(0).getId() == ID_TEST;
+            assert addressBook.getPersonList().get(0).getEmail().equals(EMAIL_TEST);
+            assert addressBook.getPersonList().get(0).getName().equals(NAME_TEST);
             System.out.println("使用新协议从本地文件读取对象");
             System.out.println(addressBook);
         } finally {

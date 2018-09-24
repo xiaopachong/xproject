@@ -1,0 +1,30 @@
+{
+		"name":"NewPerson",
+		"type":"record",
+		"fields":[
+			{"name":"name","type":"string"},
+			{"name":"id","type":"int"},
+			{"name":"email","type":"string"}
+		]
+	 },
+	 {
+	    "name":"NewCompany",
+	    "type":"record",
+	    "fields":[
+	        {"name":"name","type":"string"},
+	        {"name":"address","type":"string"}
+	    ]
+	 },
+     {"name": "NewAddressBook",
+      "type": "record",
+      "fields": [
+          {"name": "personList", "type":{
+				"type":"array",
+				"items":"NewPerson"
+		  }},
+		  {"name": "companyList","type":{
+		        "type":"array",
+		        "items":"NewCompany"
+		  }}
+      ]
+     }

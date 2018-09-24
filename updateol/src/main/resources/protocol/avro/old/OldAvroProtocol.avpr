@@ -1,0 +1,29 @@
+{"namespace": "com.study.updateol.avro.oldprotocol",
+ "protocol": "OldAvroService",
+ "types": [
+	{
+		"name":"OldPerson",
+		"type":"record",
+		"fields":[
+			{"name":"name","type":"string"},
+			{"name":"id","type":"int"},
+			{"name":"email","type":"string"}
+		]
+	 },
+     {"name": "OldAddressBook",
+      "type": "record",
+      "fields": [
+          {"name": "personList", "type":{
+				"type":"array",
+				"items":"OldPerson"
+		  }}
+      ]
+     }
+ ],
+ "messages": {
+     "send": {
+         "request": [{"name": "addressBook", "type": "OldAddressBook"}],
+         "response": "string"
+     }
+ }
+}
