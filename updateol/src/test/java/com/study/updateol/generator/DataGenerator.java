@@ -12,7 +12,7 @@ public class DataGenerator {
     public static String NAME_TEST = "hell";
     public static int ID_TEST = 93;
     public static int AGE_TEST = 34;
-    public static String ADDRESS_TEST = "湖北";
+    public static String COMPANY_ADDRESS_TEST = "湖北";
     public static String COMPANY_NAME_TEST = "电信";
 
     //序列化文件路径

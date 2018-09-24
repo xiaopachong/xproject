@@ -1,5 +1,6 @@
 package com.study.updateol;
 
+import com.study.updateol.avro.AvroProtocolTests;
 import com.study.updateol.protobuf.ProtobufProtocolTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -10,6 +11,6 @@ import org.junit.runners.Suite;
  * @Description: 分组测试
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ProtobufProtocolTests.class})
+@Suite.SuiteClasses({AvroProtocolTests.class, ProtobufProtocolTests.class})
 public class TestSuiteMain {
 }

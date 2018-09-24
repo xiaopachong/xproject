@@ -55,7 +55,7 @@ public class ProtobufTestUtils {
         personList.add(person);
         List<NewProtobufProtocol.Company> companyList = new ArrayList<NewProtobufProtocol.Company>();
         NewProtobufProtocol.Company company = NewProtobufProtocol.Company.newBuilder()
-                .setAddress(ADDRESS_TEST).setName(COMPANY_NAME_TEST).build();
+                .setAddress(COMPANY_ADDRESS_TEST).setName(COMPANY_NAME_TEST).build();
         companyList.add(company);
         NewProtobufProtocol.AddressBook addressBook = NewProtobufProtocol.AddressBook.newBuilder()
                 .addAllPerson(personList).addAllCompany(companyList).build();

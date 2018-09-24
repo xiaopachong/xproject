@@ -16,7 +16,6 @@ public class AvroProtocolTests {
     public void testBackwardCompatible() {
         try {
             AvroTestUtils.serializationWithOldProtocol();
-            AvroTestUtils.serializationWithNewProtocol();
             AvroTestUtils.deserializationWithNewProtocol();
         } catch (IOException e) {
             e.printStackTrace();

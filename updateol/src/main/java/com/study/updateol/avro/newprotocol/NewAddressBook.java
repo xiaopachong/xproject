@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class NewAddressBook extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8413514123362477458L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewAddressBook\",\"namespace\":\"com.study.updateol.avro.newprotocol\",\"fields\":[{\"name\":\"personList\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"NewPerson\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"email\",\"type\":\"string\"}]}}},{\"name\":\"companyList\",\"type\":[{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"NewCompany\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"address\",\"type\":\"string\"}]}},\"null\"]}]}");
+  private static final long serialVersionUID = -6475549966094183558L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewAddressBook\",\"namespace\":\"com.study.updateol.avro.newprotocol\",\"fields\":[{\"name\":\"personList\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"NewPerson\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"email\",\"type\":\"string\"}]}}},{\"name\":\"companyList\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"NewCompany\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"address\",\"type\":\"string\"}]}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
